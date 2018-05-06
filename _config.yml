@@ -1,2 +1,2 @@
-remote_theme: mmistakes/minimal-mistakes
+theme: minima
 title: Self-Supervised Feature Learning by Learning to Spot Artifacts
