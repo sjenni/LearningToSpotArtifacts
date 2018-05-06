@@ -1,3 +1,12 @@
+---
+layout: page
+title: simple site
+tagline: Easy websites with GitHub Pages
+description: Minimal tutorial on making a simple website with GitHub Pages
+---
+
+
+
 ## Welcome to GitHub Pages
 
 You can use the [editor on GitHub](https://github.com/sjenni/LearningToSpotArtifacts/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
