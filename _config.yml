@@ -1,5 +1,6 @@
 theme: jekyll-theme-cayman
 title: Self-Supervised Feature Learning by Learning to Spot Artifacts (CVPR2018)
-description: Simon Jenni & Paolo Favaro, University of Bern
+description: Simon Jenni & Paolo Favaro 
+                University of Bern
 author: Simon Jenni & Paolo Favaro
 email: jenni@inf.unibe.ch, favaro@inf.unibe.ch
