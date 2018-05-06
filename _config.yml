@@ -1,2 +1,2 @@
-theme: jekyll-theme-cayman
-title: "Self-Supervised Feature Learning \n by Learning to Spot Artifacts"
+remote_theme: mmistakes/minimal-mistakes
+title: Self-Supervised Feature Learning by Learning to Spot Artifacts
