@@ -1,4 +1,5 @@
 theme: minima
 title: Self-Supervised Feature Learning by Learning to Spot Artifacts
-subtitle: Simon Jenni & Paolo Favaro
-description: Project Page for CVPR2018 Paper
+author: Simon Jenni & Paolo Favaro
+email: jenni@inf.unibe.ch, favaro@inf.unibe.ch
+description: This is the project page for our CVPR2018 paper on self-supervised feature learning by learning to spot artifacts.
