@@ -1,6 +1,6 @@
 <p align="center">
   <b style="font-size: 20px">Paper:</b><br>
-  <a href="https://?" style="font-size: 20px; text-decoration: none">[Arxiv]</a>
+  <a href="http://arxiv.org/abs/1806.05024" style="font-size: 20px; text-decoration: none">[Arxiv]</a>
 </p>
 
 ![Real or Fake?](assets/real_fake.png)
