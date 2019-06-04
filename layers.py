@@ -48,6 +48,15 @@ def pixel_dropout_avg(net, p, pool_size=(3, 3), kernel=None):
     return net + (1.0 - binary_tensor) * in_avg, binary_tensor
 
 
+def pixel_dropout_global_avg(net, p, kernel=None):
+    input_shape = net.get_shape().as_list()
+    in_avg = slim.avg_pool2d(net, input_shape[1], stride=1, padding='VALID')
+    in_avg = tf.tile(in_avg, [1, input_shape[1], input_shape[2], 1])
+    noise_shape = np.array([input_shape[0], input_shape[1], input_shape[2], 1], dtype=np.int64)
+    net, binary_tensor = my_dropout(net, p, kernel, noise_shape=noise_shape, name='pixel_dropout')
+    return net + (1.0 - binary_tensor) * in_avg, binary_tensor
+
+
 def conv_group(net, num_out, kernel_size, scope):
     input_groups = tf.split(axis=3, num_or_size_splits=2, value=net)
     output_groups = [slim.conv2d(j, num_out / 2, kernel_size=kernel_size, scope='{}/conv_{}'.format(scope, idx))

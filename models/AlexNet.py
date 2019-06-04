@@ -40,17 +40,11 @@ class AlexNet:
             with slim.arg_scope(alexnet_argscope(activation=self.fc_activation, padding='SAME', training=training)):
                 with slim.arg_scope([slim.conv2d], weights_initializer=tf.truncated_normal_initializer(0.0, 0.005)):
                     enc_shape = net.get_shape().as_list()
-                    net = slim.conv2d(net, 4096, kernel_size=enc_shape[1:3], padding='VALID', scope='fc_1')
-                    self.layers['fc_1'] = net
-                    net = slim.dropout(net, 0.5, is_training=training)
-                    net = slim.conv2d(net, 4096, kernel_size=[1, 1], padding='VALID', scope='fc_2')
-                    self.layers['fc_2'] = net
-                    net = slim.dropout(net, 0.5, is_training=training)
-                    net = slim.conv2d(net, num_classes, kernel_size=[1, 1], scope='fc3',
+                    net = slim.conv2d(net, num_classes, kernel_size=enc_shape[1:3], padding='VALID', scope='fc1',
                                       activation_fn=None,
                                       normalizer_fn=None,
                                       biases_initializer=tf.zeros_initializer())
-                    self.layers['fc_3'] = net
+                    self.layers['fc_1'] = net
                     net = slim.flatten(net)
         return net
 

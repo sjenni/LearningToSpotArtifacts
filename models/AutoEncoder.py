@@ -5,12 +5,13 @@ from layers import up_conv2d
 DEFAULT_FILTER_DIMS = [64, 128, 256, 512, 1024]
 
 
-def ae_argscope(activation=tf.nn.elu, kernel_size=(3, 3), padding='SAME', w_reg=0.00005, training=True):
+def ae_argscope(activation=tf.nn.leaky_relu, kernel_size=(3, 3), padding='SAME', w_reg=0.00005, training=True):
     batch_norm_params = {
         'is_training': training,
         'decay': 0.975,
         'epsilon': 0.001,
         'center': True,
+        'scale': True,
         'fused': training,
     }
     he = tf.contrib.layers.variance_scaling_initializer(mode='FAN_AVG')
@@ -27,7 +28,7 @@ def ae_argscope(activation=tf.nn.elu, kernel_size=(3, 3), padding='SAME', w_reg=
 
 
 class AutoEncoder:
-    def __init__(self, num_layers, batch_size, target_shape, activation_fn=tf.nn.relu, tag='default'):
+    def __init__(self, num_layers, batch_size, target_shape, activation_fn=tf.nn.leaky_relu, tag='default'):
         self.name = 'AutoEncoder_{}_{}'.format(num_layers, tag)
         self.num_layers = num_layers
         self.batch_size = batch_size

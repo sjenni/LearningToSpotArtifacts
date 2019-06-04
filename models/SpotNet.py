@@ -12,7 +12,7 @@ _G_MEAN = 116.78
 _B_MEAN = 103.94
 
 
-def sdnet_argscope(activation=tf.nn.elu, kernel_size=(3, 3), padding='SAME', training=True, w_reg=0.00005,
+def sdnet_argscope(activation=tf.nn.leaky_relu, kernel_size=(3, 3), padding='SAME', training=True, w_reg=0.00005,
                    fix_bn=False):
     train_bn = training and not fix_bn
     batch_norm_params = {
@@ -20,6 +20,7 @@ def sdnet_argscope(activation=tf.nn.elu, kernel_size=(3, 3), padding='SAME', tra
         'decay': 0.975,
         'epsilon': 0.001,
         'center': True,
+        'scale': True,
         'fused': training,
     }
     he = tf.contrib.layers.variance_scaling_initializer(mode='FAN_AVG')
@@ -37,7 +38,7 @@ def sdnet_argscope(activation=tf.nn.elu, kernel_size=(3, 3), padding='SAME', tra
 
 
 class SNet:
-    def __init__(self, autoencoder, batch_size, target_shape, activation_fn=tf.nn.relu, tag='default', fix_bn=False,
+    def __init__(self, autoencoder, batch_size, target_shape, activation_fn=tf.nn.leaky_relu, tag='default', fix_bn=False,
                  disc_pad='VALID'):
         self.ae = autoencoder
         self.name = 'SDNet_{}'.format(tag)
@@ -50,7 +51,7 @@ class SNet:
     def net(self, imgs, reuse=None, train=True):
         enc_im = self.ae.encoder(imgs, reuse=reuse, training=False)
 
-        pixel_drop, drop_mask = pixel_dropout_avg(enc_im, 0.4)
+        pixel_drop, drop_mask = pixel_dropout_avg(enc_im, 0.3)
         drop_label_fake = slim.flatten(drop_mask)
         tf.summary.image('images/drop_mask', montage_tf(drop_mask, 2, 8), max_outputs=1)
 

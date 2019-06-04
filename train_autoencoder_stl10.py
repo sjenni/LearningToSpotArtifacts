@@ -2,10 +2,9 @@ from Preprocessor import Preprocessor
 from train.AETrainer import AETrainer
 from datasets.STL10 import STL10
 from models.AutoEncoder import AutoEncoder
-from layers import lrelu
 
 target_shape = [96, 96, 3]
-model = AutoEncoder(num_layers=4, batch_size=128, target_shape=target_shape, activation_fn=lrelu, tag='default')
+model = AutoEncoder(num_layers=4, batch_size=128, target_shape=target_shape, tag='default')
 data = STL10()
 preprocessor = Preprocessor(target_shape=target_shape, augment_color=True)
 trainer = AETrainer(model=model, dataset=data, pre_processor=preprocessor, num_epochs=500, lr_policy='linear',
